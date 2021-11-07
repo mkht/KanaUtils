@@ -1,5 +1,7 @@
 # KanaUtils
 
+[![Test](https://github.com/mkht/KanaUtils/actions/workflows/test.yml/badge.svg)](https://github.com/mkht/KanaUtils/actions/workflows/test.yml)
+
 ## 概要
 PowerShellで日本語のひらがな、カタカナ、ローマ字を扱うための関数群  
 ひらがな⇔カタカナの相互変換や、ローマ字への変換機能を提供します
