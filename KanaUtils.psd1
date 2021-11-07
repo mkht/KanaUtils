@@ -91,13 +91,13 @@
         PSData = @{
 
             # このモジュールに適用されているタグ。オンライン ギャラリーでモジュールを検出する際に役立ちます。
-            Tags = @('Japanese', 'Katakana', 'Hiragana', 'Romaji', 'ひらがな', 'カタカナ', 'ローマ字')
+            Tags       = @('Japanese', 'Katakana', 'Hiragana', 'Romaji', '日本語', 'ひらがな', 'カタカナ', 'ローマ字')
 
             # このモジュールのライセンスの URL。
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/mkht/KanaUtils/LICENSE'
 
             # このプロジェクトのメイン Web サイトの URL。
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/mkht/KanaUtils'
 
             # このモジュールを表すアイコンの URL。
             # IconUri = ''
