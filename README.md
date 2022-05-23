@@ -28,7 +28,7 @@ Install-Module -Name KanaUtils
 ### Convert-KanaToRomaji
 全角ひらがな、全角カタカナをヘボン式ローマ字に変換します。
 
-返還方式はパスポート氏名表記用ヘボン式ローマ字に概ね準拠しています。  
+変換方式はパスポート氏名表記用ヘボン式ローマ字に概ね準拠しています。  
   参考: https://www.ezairyu.mofa.go.jp/passport/hebon.html
 
 > ただし、長音ではないoオ, oウ, uウの変換には対応していません。  
