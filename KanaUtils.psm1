@@ -10,7 +10,12 @@
 
 ただし、長音ではないoオ, oウ, uウの変換には対応していません
 かな表記のみからではこれらを長音か否か判定できないためです
-例えば 松浦（まつうら） は本来 matsuura と表記されますが、この関数では matsura と出力します
+
+氏名表記変換での利用を想定し、特定の文字列に対しては例外的な変換を行います
+例）
+  - のうえ => noue
+  - つうら => tsuura
+  - おおう => ou
 
 ローマ字に変換できない文字（記号類、漢字など）が入力文字列に含まれる場合はエラーとなります
 
@@ -19,7 +24,7 @@
 
 .EXAMPLE
 PS> Convert-KanaToRomaji -Kana 'ミノソウ コウタ'
-minoso kota
+misono kota
 #>
 function Convert-KanaToRomaji {
     [CmdletBinding()]
@@ -36,6 +41,16 @@ function Convert-KanaToRomaji {
 
     # ひらがな=>カタカナ変換
     $Romaji = Convert-HiraganaToKatakana -Hiragana $Kana
+
+    # V2: 人名例外処理
+    #「ノウエ」 を「NOUE」に変換（イノウエ、タキノウエ）
+    $Romaji = [regex]::Replace($Romaji, 'ノウエ\b', 'NOUE', [System.Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    #「ツウラ」 を「TSUURA」に変換（マツウラ、カツウラ、ミツウラ）
+    $Romaji = [regex]::Replace($Romaji, 'ツウラ\b', 'TSUURA', [System.Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    #「コウチワ」 を「KOUCHIWA」に変換（小團扇）
+    $Romaji = $Romaji.Replace('コウチワ', 'KOUCHIWA')
+    #「オオウ」 を「OU」に変換（オオウチ）
+    $Romaji = $Romaji.Replace('オオウ', 'OU')
 
     # 拗音=>ローマ字変換
     $Romaji = $Romaji.Replace('キャ', 'kya')
@@ -236,7 +251,7 @@ function Convert-KanaToRomaji {
         Write-Error 'ローマ字に変換できない文字が含まれています'
     }
 
-    return $Romaji
+    return $Romaji.ToLowerInvariant()
 }
 
 function Convert-HiraganaToKatakana {
@@ -248,7 +263,7 @@ function Convert-HiraganaToKatakana {
         [string] $Hiragana
     )
 
-    Process {
+    process {
         if ([string]::IsNullOrEmpty($Hiragana)) {
             return $Hiragana
         }
@@ -272,7 +287,7 @@ function Convert-KatakanaToHiragana {
         [string] $Katakana
     )
 
-    Process {
+    process {
         if ([string]::IsNullOrEmpty($Katakana)) {
             return $Katakana
         }

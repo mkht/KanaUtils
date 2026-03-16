@@ -4,7 +4,7 @@
     RootModule        = 'KanaUtils.psm1'
 
     # このモジュールのバージョン番号です。
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '2.0.0'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
@@ -19,7 +19,7 @@
     CompanyName       = 'mkht'
 
     # このモジュールの著作権情報
-    Copyright         = '(c) 2021 mkht. All rights reserved.'
+    Copyright         = '(c) 2026 mkht. All rights reserved.'
 
     # このモジュールの機能の説明
     Description       = '日本語のひらがな、カタカナ、ローマ字を扱うための関数群'

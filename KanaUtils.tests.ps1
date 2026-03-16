@@ -100,6 +100,31 @@ InModuleScope KanaUtils {
             { Convert-KanaToRomaji -Kana $Kana -ErrorAction Stop } | Should -Throw
             Convert-KanaToRomaji -Kana $Kana -ErrorAction SilentlyContinue | Should -BeExactly $Expect
         }
+
+        #V2:人名例外
+        It 'イノウエ タキノウエ ノウエン  => inoue takinoue noen' {
+            $Kana = 'イノウエ タキノウエ ノウエン'
+            $Expect = 'inoue takinoue noen'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
+
+        It 'マツウラ カツウラ ミウラ コウラ コウラン => matsuura katsuura miura kora koran' {
+            $Kana = 'マツウラ カツウラ ミウラ コウラ コウラン'
+            $Expect = 'matsuura katsuura miura kora koran'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
+
+        It 'ウチワ コウチワ オオウチワ オウコウチ オオコウチ => uchiwa kouchiwa ouchiwa okochi okochi' {
+            $Kana = 'ウチワ コウチワ オオウチワ オウコウチ オオコウチ'
+            $Expect = 'uchiwa kouchiwa ouchiwa okochi okochi'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
+
+        It 'オオウチ コウチ オウチ ジョウノウチ => ouchi kochi ochi jonochi' {
+            $Kana = 'オオウチ コウチ オウチ ジョウノウチ'
+            $Expect = 'ouchi kochi ochi jonochi'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
     }
 
     Describe 'Convert-HiraganaToKatakana' {
