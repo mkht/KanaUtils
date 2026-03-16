@@ -94,11 +94,36 @@ InModuleScope KanaUtils {
             Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
         }
 
+        It 'デュポン => deyupon' {
+            $Kana = 'デュポン'
+            $Expect = 'deyupon'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
+
+        It 'デャ デュ デョ => deya deyu deyo' {
+            $Kana = 'デャ デュ デョ'
+            $Expect = 'deya deyu deyo'
+            Convert-KanaToRomaji -Kana $Kana | Should -BeExactly $Expect
+        }
+
         It '吉田 タケシ => ERROR' {
             $Kana = '吉田 タケシ'
             $Expect = '吉田 takeshi'
             { Convert-KanaToRomaji -Kana $Kana -ErrorAction Stop } | Should -Throw
             Convert-KanaToRomaji -Kana $Kana -ErrorAction SilentlyContinue | Should -BeExactly $Expect
+        }
+
+        # パイプライン入力
+        It '(pipeline) カンダ ジュン => kanda jun' {
+            $Kana = 'カンダ ジュン'
+            $Expect = 'kanda jun'
+            $Kana | Convert-KanaToRomaji | Should -BeExactly $Expect
+        }
+
+        It '(pipeline) カンダ, ジュン => kanda, jun' {
+            $InputKana = @('カンダ', 'ジュン')
+            $Expect = @('kanda', 'jun')
+            $InputKana | Convert-KanaToRomaji | Should -BeExactly $Expect
         }
 
         #V2:人名例外
